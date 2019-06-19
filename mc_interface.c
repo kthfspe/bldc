@@ -400,6 +400,14 @@ mc_state mc_interface_get_state(void) {
 	return ret;
 }
 
+void mc_interface_set_servo_angle(float servoAngle) {
+    if (mc_interface_try_input()) {
+        return;
+    }
+
+    servo_simple_set_output((double) servoAngle);
+}
+
 void mc_interface_set_duty(float dutyCycle) {
 	if (mc_interface_try_input()) {
 		return;

@@ -795,6 +795,12 @@ static THD_FUNCTION(cancom_process_thread, arg) {
 
 				if (id == 255 || id == app_get_configuration()->controller_id) {
 					switch (cmd) {
+                    case CAN_PACKET_SET_SERVO_ANGLE:
+                        ind = 0;
+                        mc_interface_set_servo_angle(buffer_get_float32(rxmsg.data8, 1e5, &ind)); 
+                        timeout_reset();
+                        break;
+
 					case CAN_PACKET_SET_DUTY:
 						ind = 0;
 						mc_interface_set_duty(buffer_get_float32(rxmsg.data8, 1e5, &ind));
